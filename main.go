@@ -10,8 +10,8 @@ func main() {
 
 	fmt.Printf("Base%d Encoding\n\n", len(charset))
 
-	num := uint64(3)
+	num := uint64(83)
 
 	ce := (&CustomEncoding{}).SetCharset(charset)
-	fmt.Printf("Encoded: %s\n", ce.Encode(num))
+	fmt.Printf("Encoded '%d' as '%s'\n", num, ce.Encode(num))
 }

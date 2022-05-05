@@ -20,7 +20,7 @@ func (ce *CustomEncoding) Encode(value interface{}) string {
 
 	switch value.(type) {
 	case uint64:
-		encoded = Convert(ce.charset, value.(uint64))
+		encoded = Encode(ce.charset, value.(uint64))
 		break
 	}
 
