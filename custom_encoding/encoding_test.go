@@ -15,4 +15,14 @@ func TestCustomEncoding(t *testing.T) {
 
 		assert.Equal(t, expected, actual)
 	})
+
+	t.Run("Decode from Base33", func(t *testing.T) {
+		charset := "123456789ABCDEFGHJKLMNPQRSTUVWXYZ"
+
+		ce := (&CustomEncoding{}).SetCharset(charset)
+		actual := ce.Decode("9")
+		expected := "9"
+
+		assert.Equal(t, expected, actual)
+	})
 }

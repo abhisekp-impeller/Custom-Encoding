@@ -1,7 +1,9 @@
 package custom_encoding
 
 import (
-	"fmt"
+	// "fmt"
+	"math"
+	"strconv"
 )
 
 func Encode(charset string, num uint64) string {
@@ -10,7 +12,7 @@ func Encode(charset string, num uint64) string {
 
 	for num != 0 {
 		r := num % base
-		fmt.Printf("r = %d\n", r)
+		// fmt.Printf("r = %d\n", r)
 		encoded += string(charset[r])
 		num /= base
 	}
@@ -18,11 +20,21 @@ func Encode(charset string, num uint64) string {
 	return encoded
 }
 
-func Decode(charset, encoded string) string {
+func Decode(charset string, encoded string) string {
 	base := uint64(len(charset))
 	decoded := ""
 
-	base = base
+	charsetMap := map[rune]int{}
+	for i, c := range charset {
+		charsetMap[c] = i
+	}
+
+	num := uint64(0)
+	for i, c := range encoded {
+		num += uint64(charsetMap[c] * int(math.Pow(float64(base), float64(i))))
+	}
+
+	decoded = strconv.FormatUint(num, 10)
 
 	return decoded
 }

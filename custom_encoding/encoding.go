@@ -26,3 +26,11 @@ func (ce *CustomEncoding) Encode(value interface{}) string {
 
 	return encoded
 }
+
+
+func (ce *CustomEncoding) Decode(encoded string) string {
+  decoded := Decode(ce.charset, encoded)
+
+	return decoded
+}
+
