@@ -16,13 +16,13 @@ func (ce *CustomEncoding) SetCharset(charset string) *CustomEncoding {
 }
 
 func (ce *CustomEncoding) Encode(value interface{}) string {
-  encoded := ""
-  
-  switch value.(type) {
-    case uint64:
-    encoded = Convert(ce.charset, value.(uint64))
-    break
-  }
+	encoded := ""
 
-  return encoded
+	switch value.(type) {
+	case uint64:
+		encoded = Convert(ce.charset, value.(uint64))
+		break
+	}
+
+	return encoded
 }
