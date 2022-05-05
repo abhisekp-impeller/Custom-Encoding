@@ -1,4 +1,4 @@
-module main
+module github.com/abhisekp-impeller/Custom-Encoding
 
 go 1.17
 
