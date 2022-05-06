@@ -1,27 +1,34 @@
 package custom_encoding
 
 import (
-	"fmt"
+	// "fmt"
 	"math"
 	"strconv"
+	"strings"
 )
 
 func Encode(charset string, num uint64) string {
 	base := uint64(len(charset))
-	encoded := ""
+	var encoded strings.Builder
+
+  // origNum = num
+
+  if num == 0 {
+    encoded.WriteByte(charset[0])
+  }
 
 	for num != 0 {
 		r := num % base
-		fmt.Printf("r = %d\n", r)
-		encoded += string(charset[r])
+		// fmt.Printf("r = %d\n", r)
+		encoded.WriteByte(charset[r])
 		num /= base
 	}
 
-	return encoded
+	return encoded.String()
 }
 
 func Decode(charset string, encoded string) string {
-	// base := uint64(len(charset))
+	base := uint64(len(charset))
 	decoded := ""
 
 	charsetMap := map[rune]int{}
@@ -30,9 +37,9 @@ func Decode(charset string, encoded string) string {
 	}
 
 	num := uint64(0)
-	for i, c := range encoded {
+	for _, c := range encoded {
     charIdx := charsetMap[c]
-		num += uint64(charIdx * int(math.Pow(float64(len(encoded) - i), float64(charIdx))))
+		num += uint64(charIdx * int(math.Pow(float64(base), float64(charIdx))))
 	}
 
 	decoded = strconv.FormatUint(num, 10)
